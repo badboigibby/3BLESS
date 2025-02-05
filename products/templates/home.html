@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <!-- Banner Section -->
+    <section class="banner">
+        <img src="{% static 'images/banner.jpg' %}" alt="Shop the Latest">
+    </section>
+
+    <!-- Promotion Bar -->
+    <section class="deals-banner">
+        <div class="container">
+            <h2 class="blinking">VAL’S Deals</h2>
+        </div>
+    </section>
+
+    <!-- Product Navigation -->
+    <section class="product-navigation">
+        <div class="container">
+            <a href="#" class="nav-item">New Trending</a>
+            <a href="#" class="nav-item">New Arrivals</a>
+            <div class="dropdown">
+                <a href="#" class="nav-item">Categories</a>
+                <div class="dropdown-content">
+                    <a href="#">Fashion</a>
+                    <a href="#">Beauty & Health</a>
+                    <a href="#">Sports & Games</a>
+                    <a href="#">Electronics</a>
+                </div>
+            </div>
+            <a href="#" class="view-all">View All</a>
+        </div>
+    </section>
+
+        
+    <!-- Product Grid -->
+    <section class="product-grid">
+        <div class="container">
+            <div class="product-item">
+                        <img src="https://m.media-amazon.com/images/I/81QpkIctqPL._AC_SL1500_.jpg" alt="Product 5">
+                        <h3>Backpack</h3>
+                        <p>$49.99</p>
+                        <a href="https://www.amazon.ca/dp/B07BFTJPZ7" class="btn">Shop Now</a>
+                    </div>
+                    <div class="product-item">
+                        <img src="https://m.media-amazon.com/images/I/81QpkIctqPL._AC_SL1500_.jpg" alt="Product 5">
+                        <h3>Backpack</h3>
+                        <p>$49.99</p>
+                        <a href="https://www.amazon.ca/dp/B07BFTJPZ7" class="btn">Shop Now</a>
+                    </div>
+                    <div class="product-item">
+                        <img src="https://m.media-amazon.com/images/I/81QpkIctqPL._AC_SL1500_.jpg" alt="Product 5">
+                        <h3>Backpack</h3>
+                        <p>$49.99</p>
+                        <a href="https://www.amazon.ca/dp/B07BFTJPZ7" class="btn">Shop Now</a>
+                    </div>
+                    <div class="product-item">
+                        <img src="https://m.media-amazon.com/images/I/81QpkIctqPL._AC_SL1500_.jpg" alt="Product 5">
+                        <h3>Backpack</h3>
+                        <p>$49.99</p>
+                        <a href="https://www.amazon.ca/dp/B07BFTJPZ7" class="btn">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+    
+
+    <!-- Product Grid -->
+    <section class="product-grid">
+        <div class="container">
+            <div class="product-item">
+                        <img src="https://m.media-amazon.com/images/I/81QpkIctqPL._AC_SL1500_.jpg" alt="Product 5">
+                        <h3>Backpack</h3>
+                        <p>$49.99</p>
+                        <a href="https://www.amazon.ca/dp/B07BFTJPZ7" class="btn">Shop Now</a>
+                    </div>
+                    <div class="product-item">
+                        <img src="https://m.media-amazon.com/images/I/81QpkIctqPL._AC_SL1500_.jpg" alt="Product 5">
+                        <h3>Backpack</h3>
+                        <p>$49.99</p>
+                        <a href="https://www.amazon.ca/dp/B07BFTJPZ7" class="btn">Shop Now</a>
+                    </div>
+                    <div class="product-item">
+                        <img src="https://m.media-amazon.com/images/I/81QpkIctqPL._AC_SL1500_.jpg" alt="Product 5">
+                        <h3>Backpack</h3>
+                        <p>$49.99</p>
+                        <a href="https://www.amazon.ca/dp/B07BFTJPZ7" class="btn">Shop Now</a>
+                    </div>
+                    <div class="product-item">
+                        <img src="https://m.media-amazon.com/images/I/81QpkIctqPL._AC_SL1500_.jpg" alt="Product 5">
+                        <h3>Backpack</h3>
+                        <p>$49.99</p>
+                        <a href="https://www.amazon.ca/dp/B07BFTJPZ7" class="btn">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+        <!-- Home Button -->
+        <div class="home-button">
+            <a href="{% url 'home' %}" class="btn">Home</a>
+        </div>
+    </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2>Have questions? Reach out to us!</h2>
+            <div class="contact-links">
+                <div class="dropdown">
+                    <span class="nav-item">Terms & Conditions</span>
+                    <div class="dropdown-content">
+                        <a href="{% url 'terms' %}">View Terms</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <span class="nav-item">Help</span>
+                    <div class="dropdown-content">
+                        <a href="{% url 'contact' %}">Contact Us</a>
+                        <a href="{% url 'reviews' %}">Reviews</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

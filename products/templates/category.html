@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category.name }} - OAG Store</title>
+</head>
+<body>
+    <h1>{{ category.name }}</h1>
+    <h2>Products in this category</h2>
+    <ul>
+        {% for product in products %}
+            <li>
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+                <p>${{ product.price }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
