@@ -1,6 +1,8 @@
 from pathlib import Path
 import os
 
+ALLOWED_HOSTS = ["oagstore.onrender.com", "localhost"]
+
 # Base directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
