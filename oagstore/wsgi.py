@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/howto/deployment/wsgi/
 import os
 from django.core.wsgi import get_wsgi_application
 
+gunicorn oagstore.wsgi:application --bind 0.0.0.0:$PORT
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'oagstore.settings')
 
 application = get_wsgi_application()
