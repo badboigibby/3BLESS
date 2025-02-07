@@ -1,46 +1,70 @@
+<!-- navbar.html -->
+
 {% load static %}
-<header>
+
+<nav class="navbar">
     <!-- Top Black Bar -->
     <div class="top-black-bar"></div>
 
     <!-- Main Navbar -->
-    <nav class="navbar">
+    <div class="navbar-container">
+        <!-- Toggle Menu for Mobile -->
+        <div class="toggle-menu">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="{% url 'men' %}">Men</a></li>
+                <li><a href="{% url 'women' %}">Women</a></li>
+                <li><a href="{% url 'kids' %}">Kids</a></li>
+            </ul>
+        </div>
+
+        <!-- Logo -->
         <div class="logo">
             <a href="{% url 'home' %}">
-                <img src="{% static 'images/oag.png' %}" alt="OAG Store">
+                <img src="{% static 'images/logo.png' %}" alt="Brand Logo">
             </a>
         </div>
-        <ul class="nav-links">
-            <li><a href="{% url 'men' %}">Men</a></li>
-            <li><a href="{% url 'women' %}">Women</a></li>
-            <li><a href="{% url 'kids' %}">Kids</a></li>
-        </ul>
-        <div class="user-actions">
-            {% if user.is_authenticated %}
-                <span>Hi, {{ user.username }}!</span>
-                <a href="{% url 'logout' %}" class="btn">Logout</a>
-            {% else %}
-                <a href="{% url 'login' %}" class="btn">Login</a>
-                <a href="{% url 'register' %}" class="btn">Register</a>
-            {% endif %}
-        </div>
-        <div class="search-bar">
-            <form action="{% url 'search' %}" method="get">
-                <input type="text" name="q" placeholder="Search...">
-                <button type="submit">Search</button>
-            </form>
-        </div>
-        <div class="country-selector">
-            <a href="#" class="nav-item">🌐 CANADA</a>
-            <div class="dropdown-content">
-                <a href="#">Canada</a>
-                <a href="#">USA</a>
-                <a href="#">UK</a>
-                <a href="#">Africa</a>
-                <a href="#">South America</a>
-                <a href="#">Asia</a>
-                <a href="#">Europe</a>
+
+        <!-- Search Symbol and Bar -->
+        <div class="search-container">
+            <div class="search-symbol">
+                <i class="fas fa-search"></i> <!-- Font Awesome search icon -->
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products...">
             </div>
         </div>
-    </nav>
-</header>
+
+        <!-- User Actions -->
+        <div class="user-actions">
+            <!-- User Icon -->
+            <div class="user-icon">
+                <i class="fas fa-user"></i> <!-- Font Awesome user icon -->
+                <div class="user-menu">
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'register' %}">Register</a>
+                </div>
+            </div>
+
+            <!-- Cart Symbol -->
+            <div class="cart-symbol">
+                <i class="fas fa-shopping-cart"></i> <!-- Font Awesome cart icon -->
+                <span class="cart-count"></span>
+            </div>
+
+            <!-- Country Selector -->
+            <div class="country-selector">
+                <span>Country</span>
+                <div class="dropdown-content">
+                    <a href="#">Canada</a>
+                    <a href="#">USA</a>
+                    <a href="#">UK</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

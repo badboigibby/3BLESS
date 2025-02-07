@@ -4,6 +4,8 @@ from django import forms
 from django.contrib.auth.models import User
 from django import forms
 from .models import Review
+from .models import Category, Product  # Use the dot (.) to import from the same directory
+
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -25,4 +27,4 @@ class UserRegistrationForm(forms.ModelForm):
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ['name', 'review']
+        fields = ['rating', 'comment', 'product']  # Use correct fields

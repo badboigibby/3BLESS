@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Women's Products</h1>
-    <!-- Add women's products here -->
-    <div class="home-button">
-        <a href="{% url 'home' %}" class="btn">Home</a>
+<h1>Women's Collection</h1>
+<div class="product-list">
+    {% for product in products %}
+    <div class="product-item">
+        <img src="{{ product.image_url }}" alt="{{ product.name }}">
+        <h3>{{ product.name }}</h3>
+        <p>${{ product.price }}</p>
+        <a href="{% url 'product_detail' product.id %}" class="btn">View Details</a>
     </div>
+    {% endfor %}
+</div>
 {% endblock %}

@@ -24,8 +24,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',  # Ensure this is included
     'django.contrib.sites',  # Optional, only if you're using Django's sites framework
-    'products',  # The eCommerce app
+    
+    
+    'oagstore',
+    'products',      # ✅ Ensure 'products' app is listed
+    'another_app',   # ✅ Add this if missing
 ]
+
+
+
 
 # Middleware
 MIDDLEWARE = [
@@ -105,3 +112,12 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'gibsonopokuwalkerjnr@gmail.com'
 EMAIL_HOST_PASSWORD = '261303643jean259274'
+
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR / "static"),  # Path to your static files directory
+]
+
+DEBUG = True
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']

@@ -1,0 +1,11 @@
+<!-- products/templates/products/product_list.html -->
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h1>Product List</h1>
+  <ul>
+    {% for product in products %}
+      <li>{{ product.name }} - ${{ product.price }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

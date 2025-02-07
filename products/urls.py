@@ -1,39 +1,24 @@
-# products/urls.py
 from django.urls import path
-from . import views
-from django.conf import settings
-from django.conf.urls.static import static
-from .views import terms_view
-from django.urls import path, include
+from . import views  # Import views from the current app
 from django.contrib import admin
-from .views import reviews  # Import the reviews view
-from .views import search
-
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('', views.home, name='home'),  # Home page
-    path('register/', views.register, name='register'),
-    path('login/', views.user_login, name='login'),
-    path('logout/', views.user_logout, name='logout'),
+    path('product/<int:product_id>/', views.product_detail, name='product_detail'),  # View product details
+    path('add-to-cart/<int:product_id>/', views.add_to_cart, name='add_to_cart'),  # Add a product to the cart
+    path('update-cart/<int:item_id>/', views.update_cart, name='update_cart'),  # Update cart item quantity
+    path('remove-from-cart/<int:item_id>/', views.remove_from_cart, name='remove_from_cart'),  # Remove item from cart
+    path('cart/', views.cart, name='cart'),  # View cart contents
+    path('checkout/', views.checkout, name='checkout'),  # Checkout process
+    path('order-confirmation/', views.order_confirmation, name='order_confirmation'),  # Order confirmation page
+    path('product-list/', views.product_list, name='product-list'),  # List of products
+    path('men/', views.men_category, name='men'),  # Men category
+    path('women/', views.women_category, name='women'),  # Women category
+    path('kids/', views.kids_category, name='kids'),  # Kids category
     path('product/<int:product_id>/', views.product_detail, name='product_detail'),
-    path('', views.home, name='home'),
-    path('men/', views.men, name='men'),  # Ensure this exists
-    path('women/', views.women, name='women'),
-    path('kids/', views.kids, name='kids'),
-    path('terms/', terms_view, name='terms'),
-    path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path('men/', views.men, name='men'),
-    path('women/', views.women, name='women'),
-    path('kids/', views.kids, name='kids'),
-    path('terms/', views.terms, name='terms'),
-    path('login/', views.user_login, name='login'),
-    path('register/', views.register, name='register'),
-    path('logout/', views.user_logout, name='logout'),
-    path('contact/', views.contact, name='contact'),
-    path('reviews/', reviews, name='reviews'),
-    path('search/', views.search, name='search'),
-    path('terms/', terms_view, name='terms'),
-    path('contact/', views.contact, name='contact'),
-    path('reviews/', views.reviews, name='reviews'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('search/', views.search, name='search'),  # ADD THIS LINE
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('terms/', views.terms, name='terms'),  # Ensure this exists
+    path('contact/', views.contact, name='contact')
+
+]
