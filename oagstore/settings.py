@@ -43,6 +43,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 # Root URL configuration
@@ -113,11 +114,20 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'gibsonopokuwalkerjnr@gmail.com'
 EMAIL_HOST_PASSWORD = '261303643jean259274'
 
-# Static files (CSS, JavaScript, Images)
+# Static files settings
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR / "static"),  # Path to your static files directory
+    os.path.join(BASE_DIR, 'static'),  # This should match your actual folder name
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Media files (if you have any uploads)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
 
 DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
