@@ -121,3 +121,9 @@ STATICFILES_DIRS = [
 
 DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
+ALLOWED_HOSTS = [
+    "oagstore.onrender.com",  # Add your Render domain here
+    "127.0.0.1",  # Keep localhost for development
+    "localhost",
+]
