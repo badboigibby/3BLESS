@@ -1,40 +1,36 @@
 from pathlib import Path
 import os
 
-ALLOWED_HOSTS = ["oagstore.onrender.com", "localhost"]
-
 # Base directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Security key (Replace with a strong key in production)
+# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '261303643jean259274'
 
-# Debug mode (Set to False in production)
+# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# Allowed hosts (Update when deploying)
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "oagstore.onrender.com",
+    "127.0.0.1",
+    "localhost",
+]
 
-# Installed apps
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',  # Ensure this is included
+    'django.contrib.staticfiles',
     'django.contrib.sites',  # Optional, only if you're using Django's sites framework
-    
-    
+
     'oagstore',
-    'products',      # ✅ Ensure 'products' app is listed
-    'another_app',   # ✅ Add this if missing
+    'products',
+    'another_app',  # Add any other app you require
 ]
 
-
-
-
-# Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -46,14 +42,12 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-# Root URL configuration
 ROOT_URLCONF = 'oagstore.urls'
 
-# Templates configuration
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'products/templates'],  # Corrected to 'products' app
+        'DIRS': [BASE_DIR / 'products/templates'],  # Ensure this path is correct for your templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -66,10 +60,9 @@ TEMPLATES = [
     },
 ]
 
-# WSGI application
 WSGI_APPLICATION = 'oagstore.wsgi.application'
 
-# Database setup (Using SQLite for now)
+# Database configuration (using SQLite)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -85,20 +78,20 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Localization settings
+# Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# For serving uploaded images (product images)
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
 # Static files configuration
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'products/static']  # Point to your app's static directory
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # For production, when running collectstatic
+STATIC_ROOT = BASE_DIR / 'staticfiles'            # For production, when running collectstatic
+
+# Media files configuration
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -107,33 +100,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+# Email configuration (using Gmail's SMTP server)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'gibsonopokuwalkerjnr@gmail.com'
 EMAIL_HOST_PASSWORD = '261303643jean259274'
-
-# Static files settings
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # This should match your actual folder name
-]
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# Media files (if you have any uploads)
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
-
-DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
-ALLOWED_HOSTS = [
-    "oagstore.onrender.com",  # Add your Render domain here
-    "127.0.0.1",  # Keep localhost for development
-    "localhost",
-]

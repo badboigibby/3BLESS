@@ -1,6 +1,5 @@
 <!-- base.html -->
-
-{% load static %} <!-- Load the static tag -->
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +19,7 @@
         {% endblock %}
     </main>
 
+    <!-- Global JavaScript hooks can be placed in scripts.js -->
     <script src="{% static 'scripts.js' %}"></script> <!-- Link to your JavaScript -->
 </body>
 </html>

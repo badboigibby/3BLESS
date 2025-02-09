@@ -1,5 +1,4 @@
 <!-- navbar.html -->
-
 {% load static %}
 
 <nav class="navbar">
@@ -9,13 +8,13 @@
     <!-- Main Navbar -->
     <div class="navbar-container">
         <!-- Toggle Menu for Mobile -->
-        <div class="toggle-menu">
-            <div class="hamburger">
+        <div class="toggle-menu" id="toggle-menu">
+            <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            <ul class="nav-links">
+            <ul class="nav-links" id="nav-links">
                 <li><a href="{% url 'men' %}">Men</a></li>
                 <li><a href="{% url 'women' %}">Women</a></li>
                 <li><a href="{% url 'kids' %}">Kids</a></li>
@@ -30,41 +29,194 @@
         </div>
 
         <!-- Search Symbol and Bar -->
-        <div class="search-container">
-            <div class="search-symbol">
-                <i class="fas fa-search"></i> <!-- Font Awesome search icon -->
+        <div class="search-container" id="search-container">
+            <div class="search-symbol" id="search-symbol">
+                <i class="fas fa-search" onclick="toggleSearchBar()"></i> <!-- Font Awesome search icon -->
             </div>
-            <div class="search-bar">
-                <input type="text" placeholder="Search for products...">
+            <div class="search-bar" id="search-bar">
+                <input type="text" placeholder="Search for products..." id="search-input">
             </div>
         </div>
 
         <!-- User Actions -->
         <div class="user-actions">
             <!-- User Icon -->
-            <div class="user-icon">
+            <div class="user-icon" id="user-icon" onclick="toggleUserMenu()">
                 <i class="fas fa-user"></i> <!-- Font Awesome user icon -->
-                <div class="user-menu">
-                    <a href="{% url 'login' %}">Login</a>
-                    <a href="{% url 'register' %}">Register</a>
+                <div class="user-menu" id="user-menu">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}">Logout</a>
+                        <a href="{% url 'profile' %}">Profile</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="black-link">Login</a>
+                        <a href="{% url 'register' %}" class="black-link">Register</a>
+                    {% endif %}
                 </div>
             </div>
 
             <!-- Cart Symbol -->
-            <div class="cart-symbol">
+            <div class="cart-symbol" id="cart-symbol" onclick="viewCart()">
                 <i class="fas fa-shopping-cart"></i> <!-- Font Awesome cart icon -->
-                <span class="cart-count"></span>
-            </div>
-
-            <!-- Country Selector -->
-            <div class="country-selector">
-                <span>Country</span>
-                <div class="dropdown-content">
-                    <a href="#">Canada</a>
-                    <a href="#">USA</a>
-                    <a href="#">UK</a>
-                </div>
+                <span class="cart-count" id="cart-count">{{ cart_item_count }}</span>
             </div>
         </div>
     </div>
 </nav>
+
+<script>
+    // Function to toggle the search bar visibility
+    function toggleSearchBar() {
+        const searchBar = document.getElementById('search-bar');
+        searchBar.classList.toggle('visible');
+    }
+
+    // Function to toggle the user menu visibility
+    function toggleUserMenu() {
+        const userMenu = document.getElementById('user-menu');
+        userMenu.classList.toggle('visible');
+    }
+
+    // Function to navigate to the cart page
+    function viewCart() {
+        window.location.href = "{% url 'cart' %}"; // Ensure the 'cart' URL is correctly named
+    }
+
+    // Mobile Menu Toggle Logic
+    document.getElementById('hamburger').addEventListener('click', function () {
+        const navLinks = document.getElementById('nav-links');
+        navLinks.classList.toggle('active');
+    });
+
+    // Close search bar when clicking outside
+    window.onclick = function (event) {
+        const searchBar = document.getElementById('search-bar');
+        const searchSymbol = document.getElementById('search-symbol');
+        if (event.target !== searchSymbol && !searchSymbol.contains(event.target) && event.target !== searchBar && !searchBar.contains(event.target)) {
+            searchBar.classList.remove('visible');
+        }
+    }
+</script>
+
+<style>
+    .navbar-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+
+    .navbar-container .nav-links {
+        display: flex;
+        gap: 20px;
+        list-style: none;
+    }
+
+    .toggle-menu {
+        display: none;
+    }
+
+    .user-actions {
+        display: flex;
+        gap: 20px;
+    }
+
+    .search-container {
+        position: relative;
+    }
+
+    .search-bar {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 5px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 20px; /* Rounded corners for the search bar */
+        width: 100%;
+        max-width: 300px; /* Limit max width */
+        margin-top: 5px;
+    }
+
+    .search-bar.visible {
+        display: block;
+    }
+
+    .user-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-menu.visible {
+        display: block;
+    }
+
+    .cart-symbol {
+        position: relative;
+    }
+
+    .cart-count {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 3px 6px;
+        font-size: 12px;
+    }
+
+    .black-link {
+        color: black; /* Make Register and Login links black */
+        text-decoration: none; /* Remove underline */
+    }
+
+    @media (max-width: 768px) {
+        .toggle-menu {
+            display: block;
+        }
+
+        .navbar-container .nav-links {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-container .nav-links.active {
+            display: flex;
+        }
+
+        .navbar-container .hamburger {
+            cursor: pointer;
+        }
+
+        .navbar-container .hamburger span {
+            display: block;
+            width: 20px; /* Smaller width for the hamburger */
+            height: 3px; /* Thinner lines */
+            margin: 5px 0;
+            background-color: black;
+        }
+
+        /* Mobile search bar */
+        .search-bar {
+            width: 80%; /* Smaller search bar width */
+            left: 10%; /* Center search bar */
+            top: 60px; /* Adjusted top position */
+            border-radius: 15px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    }
+</style>

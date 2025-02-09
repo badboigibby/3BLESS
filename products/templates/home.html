@@ -1,5 +1,4 @@
 <!-- home.html -->
-
 {% extends 'base.html' %}
 
 {% load static %}
@@ -17,19 +16,121 @@
         </div>
     </section>
 
-    <!-- Trending Section -->
+    <!-- Trending Section (Your Products) -->
     <section class="category-section">
         <h2 class="category-title">Trending</h2>
-        <div class="product-slider">
-            <!-- Products will be added here dynamically -->
+        <div class="product-slider" id="trending-slider">
+            <!-- Your products will be added here dynamically (slider markup) -->
         </div>
     </section>
 
-    <!-- New Arrivals Section -->
+    <!-- New Arrivals Section (Your Products) -->
     <section class="category-section">
         <h2 class="category-title">New Arrivals</h2>
-        <div class="product-slider">
-            <!-- Products will be added here dynamically -->
+        <div class="product-slider" id="new-arrivals-slider">
+            <!-- Your products will be added here dynamically (slider markup) -->
+        </div>
+    </section>
+
+    <!-- Amazon Products Section -->
+    <section class="amazon-section">
+        <!-- Amazon Main Title Bar -->
+        <div class="amazon-title-bar">
+            <h2 class="blinking-amazon">Amazon Products</h2>
+        </div>
+        <!-- Amazon Categories -->
+        <div class="amazon-categories">
+            <!-- Fashion Category -->
+            <div class="amazon-category">
+                <h3>Fashion</h3>
+                <div class="amazon-grid">
+                    <!-- 4 placeholder products for Fashion (e.g., shoes) -->
+                    <div class="amazon-product">
+                        <img src="{% static 'images/amazon-fashion1.jpg' %}" alt="Fashion Product">
+                    </div>
+                    <div class="amazon-product">
+                        <img src="{% static 'images/amazon-fashion2.jpg' %}" alt="Fashion Product">
+                    </div>
+                    <div class="amazon-product">
+                        <img src="{% static 'images/amazon-fashion3.jpg' %}" alt="Fashion Product">
+                    </div>
+                    <div class="amazon-product">
+                        <img src="{% static 'images/amazon-fashion4.jpg' %}" alt="Fashion Product">
+                    </div>
+                </div>
+                <div class="view-all">
+                    <a href="#" class="btn">View All</a>
+                </div>
+            </div>
+
+            <!-- Health & Beauty Category -->
+            <div class="amazon-category">
+                <h3>Health &amp; Beauty</h3>
+                <div class="amazon-grid">
+                    <!-- 4 placeholder products for Health & Beauty (e.g., fragrances) -->
+                    <div class="amazon-product">
+                        <img src="{% static 'images/amazon-health1.jpg' %}" alt="Health &amp; Beauty Product">
+                    </div>
+                    <div class="amazon-product">
+                        <img src="{% static 'images/amazon-health2.jpg' %}" alt="Health &amp; Beauty Product">
+                    </div>
+                    <div class="amazon-product">
+                        <img src="{% static 'images/amazon-health3.jpg' %}" alt="Health &amp; Beauty Product">
+                    </div>
+                    <div class="amazon-product">
+                        <img src="{% static 'images/amazon-health4.jpg' %}" alt="Health &amp; Beauty Product">
+                    </div>
+                </div>
+                <div class="view-all">
+                    <a href="#" class="btn">View All</a>
+                </div>
+            </div>
+
+            <!-- Sports & Games Category -->
+            <div class="amazon-category">
+                <h3>Sports &amp; Games</h3>
+                <div class="amazon-grid">
+                    <!-- 4 placeholder products for Sports & Games -->
+                    <div class="amazon-product">
+                        <img src="{% static 'images/amazon-sports1.jpg' %}" alt="Sports &amp; Games Product">
+                    </div>
+                    <div class="amazon-product">
+                        <img src="{% static 'images/amazon-sports2.jpg' %}" alt="Sports &amp; Games Product">
+                    </div>
+                    <div class="amazon-product">
+                        <img src="{% static 'images/amazon-sports3.jpg' %}" alt="Sports &amp; Games Product">
+                    </div>
+                    <div class="amazon-product">
+                        <img src="{% static 'images/amazon-sports4.jpg' %}" alt="Sports &amp; Games Product">
+                    </div>
+                </div>
+                <div class="view-all">
+                    <a href="#" class="btn">View All</a>
+                </div>
+            </div>
+
+            <!-- Electronics Category -->
+            <div class="amazon-category">
+                <h3>Electronics</h3>
+                <div class="amazon-grid">
+                    <!-- 4 placeholder products for Electronics -->
+                    <div class="amazon-product">
+                        <img src="{% static 'images/amazon-electronics1.jpg' %}" alt="Electronics Product">
+                    </div>
+                    <div class="amazon-product">
+                        <img src="{% static 'images/amazon-electronics2.jpg' %}" alt="Electronics Product">
+                    </div>
+                    <div class="amazon-product">
+                        <img src="{% static 'images/amazon-electronics3.jpg' %}" alt="Electronics Product">
+                    </div>
+                    <div class="amazon-product">
+                        <img src="{% static 'images/amazon-electronics4.jpg' %}" alt="Electronics Product">
+                    </div>
+                </div>
+                <div class="view-all">
+                    <a href="#" class="btn">View All</a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -44,7 +145,7 @@
             <h2>Have questions? Reach out to us!</h2>
             <div class="contact-links">
                 <div class="dropdown">
-                    <span class="nav-item">Terms & Conditions</span>
+                    <span class="nav-item">Terms &amp; Conditions</span>
                     <div class="dropdown-content">
                         <a href="{% url 'terms' %}">View Terms</a>
                     </div>
@@ -60,8 +161,9 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer Section -->
     <footer class="footer">
-        <p>&copy; 2024 OAG Store. All rights reserved.</p>
+        <p>&copy; 2024 OAG Store. All rights reserved. <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Flag_of_Canada.svg" alt="Canada Flag" class="canada-flag"></p>
     </footer>
+
 {% endblock %}

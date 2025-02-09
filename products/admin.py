@@ -35,3 +35,8 @@ class CartItemAdmin(admin.ModelAdmin):
     list_filter = ('user', 'product')  # Filter by user and product
     search_fields = ('user__username', 'product__name')  # Enable searching by username and product name
     ordering = ('-id',)  # Display newest cart items first
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('name', 'price', 'category', 'stock_quantity')
+    search_fields = ('name', 'category')
+    list_filter = ('category',)
