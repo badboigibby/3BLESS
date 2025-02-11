@@ -28,13 +28,16 @@
             </a>
         </div>
 
-        <!-- Search Symbol and Bar -->
-        <div class="search-container" id="search-container">
-            <div class="search-symbol" id="search-symbol">
-                <i class="fas fa-search" onclick="toggleSearchBar()"></i> <!-- Font Awesome search icon -->
+        <!-- Search Bar -->
+        <div class="search-container">
+            <div class="search-icon" id="search-icon">
+                <i class="fas fa-search" onclick="toggleSearchBar()"></i>
             </div>
             <div class="search-bar" id="search-bar">
-                <input type="text" placeholder="Search for products..." id="search-input">
+                <form action="{% url 'search_results' %}" method="GET">
+                    <input type="text" name="q" placeholder="Search for products..." id="search-input">
+                    <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                </form>
             </div>
         </div>
 
@@ -42,11 +45,10 @@
         <div class="user-actions">
             <!-- User Icon -->
             <div class="user-icon" id="user-icon" onclick="toggleUserMenu()">
-                <i class="fas fa-user"></i> <!-- Font Awesome user icon -->
+                <i class="fas fa-user"></i>
                 <div class="user-menu" id="user-menu">
                     {% if user.is_authenticated %}
-                        <a href="{% url 'logout' %}">Logout</a>
-                        <a href="{% url 'profile' %}">Profile</a>
+                        {# No profile link is provided since you don't want a user profile #}
                     {% else %}
                         <a href="{% url 'login' %}" class="black-link">Login</a>
                         <a href="{% url 'register' %}" class="black-link">Register</a>
@@ -56,42 +58,43 @@
 
             <!-- Cart Symbol -->
             <div class="cart-symbol" id="cart-symbol" onclick="viewCart()">
-                <i class="fas fa-shopping-cart"></i> <!-- Font Awesome cart icon -->
+                <i class="fas fa-shopping-cart"></i>
                 <span class="cart-count" id="cart-count">{{ cart_item_count }}</span>
             </div>
         </div>
     </div>
 </nav>
 
+{% if user.is_authenticated %}
+<div class="user-greeting">
+    Hi, {{ user.username }}!
+</div>
+{% endif %}
+
 <script>
-    // Function to toggle the search bar visibility
     function toggleSearchBar() {
         const searchBar = document.getElementById('search-bar');
         searchBar.classList.toggle('visible');
     }
 
-    // Function to toggle the user menu visibility
     function toggleUserMenu() {
         const userMenu = document.getElementById('user-menu');
         userMenu.classList.toggle('visible');
     }
 
-    // Function to navigate to the cart page
     function viewCart() {
-        window.location.href = "{% url 'cart' %}"; // Ensure the 'cart' URL is correctly named
+        window.location.href = "{% url 'cart:view_cart' %}";
     }
 
-    // Mobile Menu Toggle Logic
     document.getElementById('hamburger').addEventListener('click', function () {
         const navLinks = document.getElementById('nav-links');
         navLinks.classList.toggle('active');
     });
 
-    // Close search bar when clicking outside
     window.onclick = function (event) {
         const searchBar = document.getElementById('search-bar');
-        const searchSymbol = document.getElementById('search-symbol');
-        if (event.target !== searchSymbol && !searchSymbol.contains(event.target) && event.target !== searchBar && !searchBar.contains(event.target)) {
+        const searchIcon = document.getElementById('search-icon');
+        if (event.target !== searchIcon && !searchIcon.contains(event.target) && event.target !== searchBar && !searchBar.contains(event.target)) {
             searchBar.classList.remove('visible');
         }
     }
@@ -121,26 +124,47 @@
     }
 
     .search-container {
+        display: flex;
+        align-items: center;
         position: relative;
+    }
+
+    .search-icon {
+        cursor: pointer;
+        font-size: 18px;
+        color: black;
+        margin-right: 10px;
     }
 
     .search-bar {
         display: none;
         position: absolute;
-        top: 0;
+        top: 30px;
         left: 0;
-        right: 0;
-        padding: 5px;
-        background-color: white;
+        width: 250px;
+        background: white;
         border: 1px solid #ccc;
-        border-radius: 20px; /* Rounded corners for the search bar */
-        width: 100%;
-        max-width: 300px; /* Limit max width */
-        margin-top: 5px;
+        border-radius: 4px;
+        padding: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .search-bar.visible {
         display: block;
+    }
+
+    .search-bar input {
+        width: 80%;
+        padding: 5px;
+        border: none;
+        outline: none;
+    }
+
+    .search-bar button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
     }
 
     .user-menu {
@@ -172,8 +196,16 @@
     }
 
     .black-link {
-        color: black; /* Make Register and Login links black */
-        text-decoration: none; /* Remove underline */
+        color: black;
+        text-decoration: none;
+    }
+
+    .user-greeting {
+        background-color: #f8f8f8;
+        padding: 10px;
+        text-align: center;
+        font-size: 16px;
+        color: black;
     }
 
     @media (max-width: 768px) {
@@ -203,20 +235,16 @@
 
         .navbar-container .hamburger span {
             display: block;
-            width: 20px; /* Smaller width for the hamburger */
-            height: 3px; /* Thinner lines */
+            width: 20px;
+            height: 3px;
             margin: 5px 0;
             background-color: black;
         }
 
-        /* Mobile search bar */
         .search-bar {
-            width: 80%; /* Smaller search bar width */
-            left: 10%; /* Center search bar */
-            top: 60px; /* Adjusted top position */
-            border-radius: 15px;
-            padding: 10px;
-            box-sizing: border-box;
+            width: 80%;
+            left: 10%;
+            top: 50px;
         }
     }
 </style>

@@ -33,9 +33,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Close dropdowns when clicking outside
+    // Fix: Close dropdowns when clicking outside
     document.addEventListener('click', (event) => {
-        if (userMenu && !userIcon.contains(event.target)) {
+        if (userMenu && !userMenu.contains(event.target) && !userIcon.contains(event.target)) {
             userMenu.classList.remove('active');
         }
         if (countrySelector && !countrySelector.contains(event.target)) {
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Close mobile menu when clicking links
+    // Fix: Close mobile menu when clicking links
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
@@ -51,11 +51,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Redirect to Cart Page
+    // Fix: Ensure cart redirect only runs if the element exists
     const cartSymbol = document.querySelector('.cart-symbol');
     if (cartSymbol) {
         cartSymbol.addEventListener('click', function () {
-            window.location.href = "/cart"; // Update with the actual cart URL
+            window.location.href = "/cart"; // Update with actual cart URL
         });
     }
 });

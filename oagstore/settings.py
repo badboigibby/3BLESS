@@ -1,14 +1,16 @@
 from pathlib import Path
 import os
+from django.conf import settings
+from django.db import models
 
 # Base directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '261303643jean259274'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', '261303643jean259274')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = [
     "oagstore.onrender.com",
@@ -24,22 +26,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',  # Optional, only if you're using Django's sites framework
-
-    'oagstore',
-    'products',
-    'another_app',  # Add any other app you require
+    'products',  # Your app where UserProfile is defined
+    'cart',      # Your app
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Must be right after SecurityMiddleware
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'oagstore.urls'
@@ -97,13 +96,34 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Authentication settings
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'  # Redirect to the homepage after login
+LOGOUT_REDIRECT_URL = '/'  # Redirect to the homepage after logout
 
 # Email configuration (using Gmail's SMTP server)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'gibsonopokuwalkerjnr@gmail.com'
-EMAIL_HOST_PASSWORD = '261303643jean259274'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'gibsonopokuwalkerjnr@gmail.com')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '261303643jean259274')
+
+# CSRF Settings (Recommended for Production)
+CSRF_TRUSTED_ORIGINS = [
+    "https://oagstore.onrender.com",
+]
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'products/templates'],  # This must include your templates folder
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
