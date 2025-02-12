@@ -19,4 +19,5 @@ urlpatterns = [
     path('cart/', include('cart.urls')),  # Cart-related URLs
     path('terms/', views.terms, name='terms'),
     path('', include('products.urls')),
+    path('products/', include('products.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

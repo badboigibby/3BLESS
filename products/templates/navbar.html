@@ -28,16 +28,13 @@
             </a>
         </div>
 
-        <!-- Search Bar -->
-        <div class="search-container">
-            <div class="search-icon" id="search-icon">
+        <!-- Search Symbol and Bar -->
+        <div class="search-container" id="search-container">
+            <div class="search-symbol" id="search-symbol">
                 <i class="fas fa-search" onclick="toggleSearchBar()"></i>
             </div>
             <div class="search-bar" id="search-bar">
-                <form action="{% url 'search_results' %}" method="GET">
-                    <input type="text" name="q" placeholder="Search for products..." id="search-input">
-                    <button type="submit"><i class="fas fa-arrow-right"></i></button>
-                </form>
+                <input type="text" placeholder="Search for products..." id="search-input">
             </div>
         </div>
 
@@ -93,8 +90,8 @@
 
     window.onclick = function (event) {
         const searchBar = document.getElementById('search-bar');
-        const searchIcon = document.getElementById('search-icon');
-        if (event.target !== searchIcon && !searchIcon.contains(event.target) && event.target !== searchBar && !searchBar.contains(event.target)) {
+        const searchSymbol = document.getElementById('search-symbol');
+        if (event.target !== searchSymbol && !searchSymbol.contains(event.target) && event.target !== searchBar && !searchBar.contains(event.target)) {
             searchBar.classList.remove('visible');
         }
     }
@@ -124,47 +121,27 @@
     }
 
     .search-container {
-        display: flex;
-        align-items: center;
         position: relative;
     }
 
-    .search-icon {
-        cursor: pointer;
-        font-size: 18px;
-        color: black;
-        margin-right: 10px;
-    }
-
+    /* Updated Search Bar Styling: Normal Rectangular Look */
     .search-bar {
         display: none;
         position: absolute;
-        top: 30px;
+        top: 0;
         left: 0;
-        width: 250px;
-        background: white;
+        right: 0;
+        padding: 8px; /* Increased padding for a standard look */
+        background-color: white;
         border: 1px solid #ccc;
-        border-radius: 4px;
-        padding: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 4px; /* Changed from 20px to 4px for a rectangular shape */
+        width: 100%;
+        max-width: 300px;
+        margin-top: 5px;
     }
 
     .search-bar.visible {
         display: block;
-    }
-
-    .search-bar input {
-        width: 80%;
-        padding: 5px;
-        border: none;
-        outline: none;
-    }
-
-    .search-bar button {
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-size: 16px;
     }
 
     .user-menu {
@@ -241,10 +218,14 @@
             background-color: black;
         }
 
+        /* Mobile Search Bar: Centered and Rectangular */
         .search-bar {
             width: 80%;
             left: 10%;
-            top: 50px;
+            top: 60px;
+            border-radius: 4px; /* Changed to rectangular look */
+            padding: 10px;
+            box-sizing: border-box;
         }
     }
 </style>

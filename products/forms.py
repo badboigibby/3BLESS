@@ -24,3 +24,10 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ['rating', 'review_text']
+
+class ProductForm(forms.ModelForm):
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label="Select Category")  # This adds category selection
+
+    class Meta:
+        model = Product
+        fields = ['name', 'price', 'description', 'created_at', 'image', 'category']

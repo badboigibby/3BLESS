@@ -6,16 +6,39 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from .models import Product, Review, CartItem
 from .forms import UserRegistrationForm, ReviewForm
+from .forms import ProductForm
+from .models import Category, Product
 
 # Home view displaying all products
 def home(request):
     products = Product.objects.all()
     return render(request, 'home.html', {'products': products})
 
+# View to display the product form and handle product submission
+def add_product(request):
+    categories = Category.objects.all()  # Get all categories
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('product_list')  # Redirect after successful form submission
+    else:
+        form = ProductForm()
+
+    return render(request, 'products/add_product.html', {
+        'form': form,
+        'categories': categories,  # Pass categories to the template
+    })
+    
 # Product list view displaying all products
 def product_list(request):
-    products = Product.objects.all()
-    return render(request, 'products/product_list.html', {'products': products})
+    categories = Category.objects.all()  # Get all categories
+    products = Product.objects.all()  # Get all products
+
+    return render(request, 'products/product_list.html', {
+        'categories': categories,
+        'products': products
+    })
 
 # Product detail view to display product and reviews
 def product_detail(request, product_id):

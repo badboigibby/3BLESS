@@ -1,27 +1,29 @@
 from django.contrib import admin
-from .models import Category, Product, Review  # Correct import
+from .models import Category, Product, Review  # Import models
 
-# CategoryAdmin: Control how the Category model appears in the admin panel
+
+# CategoryAdmin
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')  # Display ID and Name
-    search_fields = ('name',)  # Enable search by category name
-    ordering = ('name',)  # Display categories in alphabetical order
+    list_display = ('name', 'description')  # ✅ No 'price' (Categories don't have prices)
+    search_fields = ('name',)  # ✅ Corrected search field
+    ordering = ('name',)  # ✅ Must be a tuple
+    list_filter = ('name',)  # ✅ Filtering categories by name
 
-# ProductAdmin: Control how the Product model appears in the admin panel
+# ProductAdmin
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'category', 'price')  # Fields to display
-    list_filter = ('category', 'price')  # Filters by category and price
-    search_fields = ('name', 'category__name')  # Enable searching by product name and category name
-    ordering = ('-price',)  # Display products ordered by price
-    list_editable = ('price',)  # Allow price editing from the list view
-    list_per_page = 20  # Limit products per page
+    list_display = ('name', 'price', 'description')  # ✅ Only valid fields
+    list_filter = ('price',)  # ✅ Removed 'category' if it's not a field in Product
+    search_fields = ('name', 'category__name')  # ✅ Searching by product name and category name
+    ordering = ('-price',)  # ✅ Ordering by price descending
+    list_editable = ('price',)  # ✅ Allow price editing from list view
+    list_per_page = 20  # ✅ Limit products per page
 
-# ReviewAdmin: Control how the Review model appears in the admin panel
+# ReviewAdmin
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('user', 'product', 'rating', 'created_at')  # Display user, product, rating, and creation date
-    list_filter = ('rating', 'created_at')  # Filter by rating and creation date
-    search_fields = ('user__username', 'product__name')  # Enable searching by username and product name
-    ordering = ('-created_at',)  # Display newest reviews first
+    list_display = ('user', 'product', 'rating', 'created_at')  # ✅ Display user, product, rating, and created_at
+    list_filter = ('rating', 'created_at')  # ✅ Filtering by rating and created_at
+    search_fields = ('user__username', 'product__name')  # ✅ Searching by user and product name
+    ordering = ('-created_at',)  # ✅ Ordering reviews from newest to oldest
