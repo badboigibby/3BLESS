@@ -162,10 +162,11 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('home')
+            return redirect('home')  # Redirect to home page after login
     else:
         form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+
+    return render(request, "registration/login.html", {"form": form})
 
 # User Logout View
 @login_required
